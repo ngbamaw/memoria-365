@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       final response = await _supabase.auth.signInWithPassword(email: email, password: password);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connexion réussie")));
-        loginPage.onLoginCallback();
+        context.router.replace(const DailyQuestionRoute());
       }
     } on AuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
