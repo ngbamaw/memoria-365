@@ -11,6 +11,6 @@ class AuthGuard extends AutoRouteGuard {
     final currentUser = _supabase.auth.currentUser;
     if (currentUser != null) return resolver.next();
     
-    router.navigate(LoginRoute(onLoginCallback: () => resolver.next()));
+    router.navigate(const LoginRoute());
   }
 }

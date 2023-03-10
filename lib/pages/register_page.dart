@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const Text("Vous avez un compte ?"),
                 TextButton(
-                    onPressed: () => context.router.replace(LoginRoute(onLoginCallback: () => context.router.pop())),
+                    onPressed: () => context.router.replace(const LoginRoute()),
                     child: Text(
                       "Connectez-vous",
                       style: themeData.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline),

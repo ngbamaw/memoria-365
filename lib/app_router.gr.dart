@@ -52,13 +52,9 @@ class AppRouter extends _i14.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>();
       return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i3.LoginPage(
-          key: args.key,
-          onLoginCallback: args.onLoginCallback,
-        ),
+        child: const _i3.LoginPage(),
       );
     },
     SubscriptionRoute.name: (routeData) {
@@ -128,13 +124,15 @@ class AppRouter extends _i14.RootStackRouter {
       );
     },
     ChangeFieldUserRoute.name: (routeData) {
-      final args = routeData.argsAs<ChangeFieldUserRouteArgs>();
+      final args = routeData.argsAs<ChangeFieldUserRouteArgs>(
+          orElse: () => const ChangeFieldUserRouteArgs());
       return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i13.ChangeFieldUserPage(
           key: args.key,
           title: args.title,
           field: args.field,
+          initialValue: args.initialValue,
         ),
       );
     },
@@ -233,36 +231,14 @@ class RegisterRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginPage]
-class LoginRoute extends _i14.PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({
-    _i15.Key? key,
-    required dynamic Function() onLoginCallback,
-  }) : super(
+class LoginRoute extends _i14.PageRouteInfo<void> {
+  const LoginRoute()
+      : super(
           LoginRoute.name,
           path: '/login-page',
-          args: LoginRouteArgs(
-            key: key,
-            onLoginCallback: onLoginCallback,
-          ),
         );
 
   static const String name = 'LoginRoute';
-}
-
-class LoginRouteArgs {
-  const LoginRouteArgs({
-    this.key,
-    required this.onLoginCallback,
-  });
-
-  final _i15.Key? key;
-
-  final dynamic Function() onLoginCallback;
-
-  @override
-  String toString() {
-    return 'LoginRouteArgs{key: $key, onLoginCallback: $onLoginCallback}';
-  }
 }
 
 /// generated route for
@@ -446,8 +422,9 @@ class ChangeFieldUserRoute
     extends _i14.PageRouteInfo<ChangeFieldUserRouteArgs> {
   ChangeFieldUserRoute({
     _i15.Key? key,
-    required String title,
-    required String field,
+    String? title,
+    String? field,
+    String? initialValue,
   }) : super(
           ChangeFieldUserRoute.name,
           path: '/change-field-user-page',
@@ -455,6 +432,7 @@ class ChangeFieldUserRoute
             key: key,
             title: title,
             field: field,
+            initialValue: initialValue,
           ),
         );
 
@@ -464,18 +442,21 @@ class ChangeFieldUserRoute
 class ChangeFieldUserRouteArgs {
   const ChangeFieldUserRouteArgs({
     this.key,
-    required this.title,
-    required this.field,
+    this.title,
+    this.field,
+    this.initialValue,
   });
 
   final _i15.Key? key;
 
-  final String title;
+  final String? title;
 
-  final String field;
+  final String? field;
+
+  final String? initialValue;
 
   @override
   String toString() {
-    return 'ChangeFieldUserRouteArgs{key: $key, title: $title, field: $field}';
+    return 'ChangeFieldUserRouteArgs{key: $key, title: $title, field: $field, initialValue: $initialValue}';
   }
 }

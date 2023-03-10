@@ -5,8 +5,7 @@ import 'package:memoria/components/InputField.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key, required this.onLoginCallback}) : super(key: key);
-  final Function() onLoginCallback;
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -35,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final response = await _supabase.auth.signInWithPassword(email: email, password: password);
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connexion réussie")));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Bienvenue !")));
         context.router.replace(const DailyQuestionRoute());
       }
     } on AuthException catch (e) {
