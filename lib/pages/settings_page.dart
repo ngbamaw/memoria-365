@@ -32,7 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
       {
         "title": "Numéro de téléphone",
         "action": (BuildContext context) => () => context.router
-            .push(ChangeFieldUserRoute(title: "Numéro de téléphone", field: "user.phone", initialValue: "+33612345678"))
+            .push(ChangeFieldUserRoute(title: "Numéro de téléphone", field: "user.phone"))
       },
       {
         "title": "Adresse email",

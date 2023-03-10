@@ -18,10 +18,34 @@ class _ChangeFieldUserPageState extends State<ChangeFieldUserPage> {
   final _supabase = Supabase.instance.client;
   final textFieldController = TextEditingController();
 
+  getUserField(String field) {
+    switch (field) {
+      case "email":
+        return _supabase.auth.currentUser!.email;
+      case "phone":
+        return _supabase.auth.currentUser!.phone;
+      default:
+        return "";
+    }
+  }
+
+  retrieveUserName() async {
+    final profile = await _supabase
+        .from("profile")
+        .select("username")
+        .eq("id", _supabase.auth.currentUser!.id);
+    return profile[0]["username"];
+  }
+
   @override
   void initState() {
     super.initState();
-    textFieldController.text = page.initialValue ?? "";
+    final field = page.field!.split(".");
+    if(field[0] == "user") {
+      textFieldController.text = getUserField(field[1]);
+    } else {
+      retrieveUserName().then((value) => textFieldController.text = value);
+    }
   }
 
   Future<void> _updateUserField() async {
@@ -38,6 +62,11 @@ class _ChangeFieldUserPageState extends State<ChangeFieldUserPage> {
         case "password":
           await _supabase.auth.updateUser(
             UserAttributes(password: text),
+          );
+          break;
+        case "phone":
+          await _supabase.auth.updateUser(
+            UserAttributes(phone: text),
           );
           break;
         default:
@@ -83,7 +112,7 @@ class _ChangeFieldUserPageState extends State<ChangeFieldUserPage> {
                         controller: textFieldController,
                         style: themeData.textTheme.bodyLarge,
                         decoration: InputDecoration(
-                          hintText: 'Entrez votre ${page.title?.toLowerCase()}',
+                          hintText: 'Entrez un ${page.title?.toLowerCase()}',
                           hintStyle: const TextStyle(color: Colors.white),
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
