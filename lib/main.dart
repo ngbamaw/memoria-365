@@ -7,13 +7,8 @@ import 'package:memoria/route_guard.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
-  await dotenv.load(mergeWith: Platform.environment);
-  final supabaseUrl = dotenv.env['SUPABASE_URL'];
-  final supabaseKey = dotenv.env['SUPABASE_KEY'];
-
-  if (supabaseUrl == null || supabaseKey == null) {
-    throw Exception('Missing Supabase URL or Key');
-  }
+  const supabaseUrl = "https://qivjqtevaoogrnqgnrdb.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpdmpxdGV2YW9vZ3JucWducmRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA2Njk2MzQsImV4cCI6MTk4NjI0NTYzNH0.2nQRnmagLjd7_P7rKJ9YaFm-Rqini5RZ-ddebaulH5g";
 
   await Supabase.initialize(
     url: supabaseUrl,
